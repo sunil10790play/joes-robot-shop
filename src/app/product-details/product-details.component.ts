@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IProduct } from '../catalog/product.model';
 
 @Component({
@@ -8,6 +8,7 @@ import { IProduct } from '../catalog/product.model';
 })
 export class ProductDetailsComponent {
   @Input() product!: IProduct;
+  @Output() buy = new EventEmitter();
 
   getDiscountedClasses(product: IProduct) {
     if (product.discount !== 0) {
@@ -15,5 +16,9 @@ export class ProductDetailsComponent {
     } else {
       return '';
     }
+  }
+
+  buyBtnClicked(product: IProduct) {
+    this.buy.emit();
   }
 }
